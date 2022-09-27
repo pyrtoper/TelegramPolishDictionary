@@ -8,6 +8,10 @@ import java.util.*;
 
 @Entity
 @Table(name = "words")
+@NamedEntityGraph(name = "graph.Word.meanings.wordForms.translations",
+        attributeNodes = {@NamedAttributeNode("translatedMeanings"),
+                @NamedAttributeNode("wordForms"),
+                @NamedAttributeNode("translationSet")})
 public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +24,7 @@ public class Word {
     @OneToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             targetEntity = com.pyrtoper.dictionary.entity.WordForms.class)
-    @JoinColumn(name = "word_forms_id")
+    @JoinColumn(name = "word_forms_id", referencedColumnName = "id")
     private WordForms wordForms;
 
 
@@ -28,15 +32,15 @@ public class Word {
     @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             targetEntity = com.pyrtoper.dictionary.entity.TranslatedMeaning.class)
-    @JoinColumn(name = "meaning_id")
+    @JoinColumn(name = "meaning_id", referencedColumnName = "id")
     private TranslatedMeaning translatedMeanings;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
-            name = "translations_words",
-            joinColumns = @JoinColumn(name = "word_id"),
-            inverseJoinColumns = @JoinColumn(name = "translation_id")
+            name = "translation_word",
+            joinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "translation_id", referencedColumnName = "id")
     )
     private Set<Translation> translationSet;
 
@@ -79,11 +83,11 @@ public class Word {
         this.wordForms = wordForms;
     }
 
-    public Set<Translation> getTranslationList() {
+    public Set<Translation> getTranslationSet() {
         return translationSet;
     }
 
-    public void setTranslationList(Set<Translation> translationList) {
+    public void setTranslationSet(Set<Translation> translationList) {
         this.translationSet = translationList;
     }
 
@@ -96,8 +100,11 @@ public class Word {
 
     @Override
     public String toString() {
-        return "Слово: " + name + '\n' +
-                "Значения: " + translatedMeanings.toString() + "\n" +
-                "Формы слова: " + wordForms.toString();
+        String result = ("Слово: " + name +
+                translatedMeanings.toString() +
+                wordForms.toString());
+        return result;
     }
+
+
 }

@@ -1,28 +1,17 @@
 package com.pyrtoper.dictionary.bot;
 
-import com.pyrtoper.dictionary.entity.Word;
 import com.pyrtoper.dictionary.handlers.CallbackQueryHandler;
 import com.pyrtoper.dictionary.handlers.MessageHandler;
 import com.pyrtoper.dictionary.service.WordService;
-import org.checkerframework.checker.index.qual.PolyUpperBound;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.generics.LongPollingBot;
 import org.telegram.telegrambots.starter.SpringWebhookBot;
-import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-
-
 
 
 @PropertySource("classpath:application.properties")
@@ -31,10 +20,11 @@ public class DictionaryBot extends SpringWebhookBot {
     private String botToken;
 
     private String botPath;
+    public static boolean PolishToRussian = true;
 
-    private WordService wordService;
-
+    @Autowired
     private MessageHandler messageHandler;
+    @Autowired
     private CallbackQueryHandler callbackQueryHandler;
 
 
@@ -116,7 +106,7 @@ public class DictionaryBot extends SpringWebhookBot {
         if (update.hasCallbackQuery()) {
             CallbackQuery callbackQuery = update.getCallbackQuery();
             return callbackQueryHandler.processCallbackQuery(callbackQuery);
-        } else {
+        } else if (update.hasMessage()) {
             Message message = update.getMessage();
             if (message != null) {
                 return messageHandler.answerMessage(message);
@@ -140,5 +130,17 @@ public class DictionaryBot extends SpringWebhookBot {
 
     public void setBotPath(String botPath) {
         this.botPath = botPath;
+    }
+
+    public boolean isPolishToRussian() {
+        return PolishToRussian;
+    }
+
+    public void setPolishToRussian(boolean polishToRussian) {
+        PolishToRussian = polishToRussian;
+    }
+
+    public static void setPolishToRussianWorkState(boolean desiredState) {
+        DictionaryBot.PolishToRussian = desiredState;
     }
 }
