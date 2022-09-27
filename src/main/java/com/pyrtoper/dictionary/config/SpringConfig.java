@@ -7,6 +7,7 @@ import com.pyrtoper.dictionary.handlers.MessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Configuration
+@EnableAspectJAutoProxy
 public class SpringConfig {
 
     @Autowired

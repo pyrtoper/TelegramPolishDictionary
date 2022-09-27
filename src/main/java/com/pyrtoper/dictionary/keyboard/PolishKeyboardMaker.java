@@ -13,23 +13,25 @@ import java.util.List;
 @Component
 public class PolishKeyboardMaker {
     public ReplyKeyboardMarkup getPolishKeyboard() {
-        KeyboardRow row1 = new KeyboardRow();
-        KeyboardRow row2 = new KeyboardRow();
-        for (PolishLetter letter: PolishLetter.values()) {
-//            InlineKeyboardButton button1 = new InlineKeyboardButton();
-//            InlineKeyboardButton button2 = new InlineKeyboardButton();
-//            button1.setCallbackData(letter.getLetter());
-//            button1.setText(letter.getLetter());
-//            button2.setCallbackData(letter.getLetter().toUpperCase());
-//            button2.setText(letter.getLetter().toUpperCase());
-//            row1.add(button1);
-
-            row1.add(new KeyboardButton(letter.getLetter()));
-            row2.add(new KeyboardButton(letter.getLetter().toUpperCase()));
-        }
+        KeyboardRow row = new KeyboardRow();
+//        KeyboardRow row2 = new KeyboardRow();
+//        for (PolishLetter letter: PolishLetter.values()) {
+////            InlineKeyboardButton button1 = new InlineKeyboardButton();
+////            InlineKeyboardButton button2 = new InlineKeyboardButton();
+////            button1.setCallbackData(letter.getLetter());
+////            button1.setText(letter.getLetter());
+////            button2.setCallbackData(letter.getLetter().toUpperCase());
+////            button2.setText(letter.getLetter().toUpperCase());
+////            row1.add(button1);
+//
+//            row1.add(new KeyboardButton(letter.getLetter()));
+//            row2.add(new KeyboardButton(letter.getLetter().toUpperCase()));
+//        }
+        row.add(new KeyboardButton("Польский -> Русский"));
+        row.add(new KeyboardButton("Русский -> Польский"));
         List<KeyboardRow> keyboard = new ArrayList<>();
-        keyboard.add(row1);
-        keyboard.add(row2);
+        keyboard.add(row);
+//        keyboard.add(row2);
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         replyKeyboardMarkup.setKeyboard(keyboard);
         replyKeyboardMarkup.setResizeKeyboard(true);

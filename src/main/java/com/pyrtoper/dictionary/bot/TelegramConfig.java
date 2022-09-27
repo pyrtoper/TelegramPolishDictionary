@@ -1,5 +1,6 @@
 package com.pyrtoper.dictionary.bot;
 
+import com.pyrtoper.dictionary.constant.WorkState;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ public class TelegramConfig {
     @Value("${telegram.bot.token}")
     private String botToken;
 
+    private WorkState workState = WorkState.POLISH_TO_RUSSIAN;
     public String getWebhookPath() {
         return webhookPath;
     }
@@ -34,5 +36,13 @@ public class TelegramConfig {
 
     public void setBotToken(String botToken) {
         this.botToken = botToken;
+    }
+
+    public WorkState getWorkState() {
+        return workState;
+    }
+
+    public void setWorkState(WorkState workState) {
+        this.workState = workState;
     }
 }

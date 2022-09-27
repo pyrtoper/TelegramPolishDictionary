@@ -18,6 +18,7 @@ public enum Numeral {
         Holder.MAP.put(numeral, this);
         Holder.MAP.put(russianNumeral, this);
         this.numeral = numeral;
+        this.russianNumeral = russianNumeral;
     }
 
     public String getNumeral() {
