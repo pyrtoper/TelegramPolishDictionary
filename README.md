@@ -1,1 +1,1 @@
-# TelegramPL-RUDictWithDeclinations
+# TelegramDictionary
