@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Entity
@@ -53,17 +54,14 @@ public class TranslatedMeaning {
         String prefixMeaning = "\n    ";
 //        for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet()) {
         for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet().stream()
-                    .sorted(Comparator.comparing(entry -> {if (entry.getValue().get(0).isEmpty()) {
-                        return entry.getValue().get(1);
-                    } else {
-                        return entry.getValue().get(0);
-                    }
-                    })
-                )
-                .collect(Collectors.toList())) {
+                    .sorted(Comparator.comparing(entry -> entry.getValue().get(0)))
+                    .collect(Collectors.toList())) {
             result.append(prefixSpecification);
             result.append(entry.getKey());
-            for (String meaning: entry.getValue().stream().sorted().collect(Collectors.toList())) {
+            for (String meaning: entry.getValue().stream()
+                    .filter(Predicate.not(String::isEmpty))
+                    .sorted()
+                    .collect(Collectors.toList())) {
                 result.append(prefixMeaning);
                 result.append(meaning);
             }
