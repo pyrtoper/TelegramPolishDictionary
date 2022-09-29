@@ -11,3 +11,5 @@ It is a dictionary Polish -> Russian and Russian -> Polish telegram bot.
 3. Additional functions:
    - Bot also supports "Did you mean..." function. If you misspelled the word, bot will suggest you similar to user's input words. So, you can type the word in different forms!
    - If user still could not find his word, user can warn bot that developer messed up by clicking special button (it is the last button among "Similar words" buttons);
+# **Trying out**
+Link to the bot: [@Polish_Russian_bot](https://t.me/Polish_Russian_bot)
