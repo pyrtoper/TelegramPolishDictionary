@@ -106,11 +106,11 @@ public class Word {
         result.append(translatedMeanings.toString());
         result.append(wordForms.toString());
         if (!translationSet.isEmpty()) {
-            result.append("Возможный перевод на русский: ");
+            result.append("\n\uD83D\uDC49Возможный перевод на русский: ");
             String prefix = "";
             for (Translation translation: translationSet) {
                 result.append(prefix);
-                result.append(translation);
+                result.append(translation.getName());
                 prefix = ", ";
             }
         }

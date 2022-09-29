@@ -72,7 +72,7 @@ public class Translation {
             result.append("К сожалению, на польский перевести не удалось :(." +
                     "Мой создатель уже оповещен об этом!");
         } else {
-            result.append("Возможный перевод на польский:\n");
+            result.append("\uD83D\uDC49Возможный перевод на польский:\n");
             String prefix = "";
             for (Word word: wordSet) {
                 result.append(prefix);
