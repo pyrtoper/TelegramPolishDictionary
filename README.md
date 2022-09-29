@@ -15,11 +15,11 @@ It is a dictionary Polish -> Russian and Russian -> Polish telegram bot.
 Link to the bot: [@Polish_Russian_bot](https://t.me/Polish_Russian_bot)
 # **Techologies**
 - [Spring Boot](https://spring.io/projects/spring-boot)
-- Spring AOP - Logging
 - [Spring Data](https://spring.io/projects/spring-data), JPA, [Hibernate ORM](https://hibernate.org/orm/) - Interacting with DBMS
 - [Apache Maven](https://maven.apache.org/) - Dependencies managment
 - [PostgreSQL](https://www.postgresql.org/) - DBMS
 - [Telegram Bots](https://core.telegram.org/bots) - Interaction with Telegram API
+- Spring AOP - Logging
 - Git - Version Control System
 - [Railway.app](https://railway.app/) - Hosting and deploying
 
