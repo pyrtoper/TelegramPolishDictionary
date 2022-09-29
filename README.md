@@ -16,7 +16,7 @@ Link to the bot: [@Polish_Russian_bot](https://t.me/Polish_Russian_bot)
 # **Techologies**
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Data](https://spring.io/projects/spring-data), JPA, [Hibernate ORM](https://hibernate.org/orm/) - Interacting with DBMS
-- [Apache Maven](https://maven.apache.org/) - Dependencies managment
+- [Apache Maven](https://maven.apache.org/) - Dependencies management
 - [PostgreSQL](https://www.postgresql.org/) - DBMS
 - [Telegram Bots](https://core.telegram.org/bots) - Interaction with Telegram API
 - Spring AOP - Logging
