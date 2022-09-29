@@ -1,6 +1,7 @@
 # TelegramDictionary
-What is that?
-It is a dictionary Polish -> Russian and Russian -> Polish telegram bot. What he can do:
+# **What is that?**
+It is a dictionary Polish -> Russian and Russian -> Polish telegram bot. 
+# **What he can do:**
 In Polish -> Russian state:
 Show to the user meanings of user's word, translated to Russian language;
 If user's word is a noun, bot shows its forms according to Polish Declinations (Mianownik, Dopełniacz etc.);
