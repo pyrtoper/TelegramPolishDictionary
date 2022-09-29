@@ -22,4 +22,7 @@ Link to the bot: [@Polish_Russian_bot](https://t.me/Polish_Russian_bot)
 - Spring AOP - Logging
 - Git - Version Control System
 - [Railway.app](https://railway.app/) - Hosting and deploying
-
+# **Author**
+Dmitriy Malkin
+# **Contacts**
+Telegram: [@pyrtoper](https://t.me/pyrtoper)
