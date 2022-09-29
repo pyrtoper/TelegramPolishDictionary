@@ -47,7 +47,7 @@ public class WordForms {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append("\nФормы слова:\n");
+        result.append("\n\uD83D\uDC49Формы слова:\n");
         String prefixGeneral = "";
         String prefixNumeral = "\n    ";
         String prefixDeclination = "\n        ";
@@ -71,7 +71,7 @@ public class WordForms {
                 }
             }
         }
-        if (result.toString().equals("\nФормы слова:\n")) {
+        if (result.toString().equals("\n\uD83D\uDC49Формы слова:\n")) {
             return "";
         }
         return result.toString();

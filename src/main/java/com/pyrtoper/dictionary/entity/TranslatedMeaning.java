@@ -49,7 +49,7 @@ public class TranslatedMeaning {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append("\nЗначения:");
+        result.append("\n" + "\uD83D\uDC49" +  "Значения:");
         String prefixSpecification = "\n";
         String prefixMeaning = "\n    ";
 //        for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet()) {
@@ -60,12 +60,14 @@ public class TranslatedMeaning {
                             .orElse("")))
                     .collect(Collectors.toList())) {
             result.append(prefixSpecification);
+            result.append("\uD83D\uDD39");
             result.append(entry.getKey());
             for (String meaning: entry.getValue().stream()
                     .filter(Predicate.not(String::isEmpty))
                     .sorted()
                     .collect(Collectors.toList())) {
                 result.append(prefixMeaning);
+                result.append("\u25AA");
                 result.append(meaning);
             }
         }
