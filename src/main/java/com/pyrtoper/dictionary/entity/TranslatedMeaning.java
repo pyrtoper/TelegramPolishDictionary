@@ -54,7 +54,10 @@ public class TranslatedMeaning {
         String prefixMeaning = "\n    ";
 //        for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet()) {
         for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet().stream()
-                    .sorted(Comparator.comparing(entry -> entry.getValue().get(0)))
+                    .sorted(Comparator.comparing(entry -> entry.getValue().stream()
+                            .filter(Predicate.not(String::isEmpty))
+                            .findFirst()
+                            .orElse("")))
                     .collect(Collectors.toList())) {
             result.append(prefixSpecification);
             result.append(entry.getKey());

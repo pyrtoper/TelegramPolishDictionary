@@ -100,10 +100,24 @@ public class Word {
 
     @Override
     public String toString() {
-        String result = ("Слово: " + name +
-                translatedMeanings.toString() +
-                wordForms.toString());
-        return result;
+        StringBuilder result = new StringBuilder();
+        result.append("Слово: ");
+        result.append(name);
+        result.append(translatedMeanings.toString());
+        result.append(wordForms.toString());
+        if (!translationSet.isEmpty()) {
+            result.append("Возможный перевод на русский: ");
+            String prefix = "";
+            for (Translation translation: translationSet) {
+                result.append(prefix);
+                result.append(translation);
+                prefix = ", ";
+            }
+        }
+//        String result = ("Слово: " + name +
+//                translatedMeanings.toString() +
+//                wordForms.toString());
+        return result.toString();
     }
 
 
