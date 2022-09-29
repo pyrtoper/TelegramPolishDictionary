@@ -33,11 +33,9 @@ public class MessageHandler {
         if (message.getText().equals("/start")) {
             return sendStartMessage(message.getChatId().toString());
         } else if (message.getText().equals("Польский -> Русский")) {
-//            DictionaryBot.setPolishToRussianWorkState(true);
             telegramConfig.setWorkState(WorkState.POLISH_TO_RUSSIAN);
             return new SendMessage(message.getChatId().toString(), "Текущий режим: Польский -> Русский!");
         } else if (message.getText().equals("Русский -> Польский")) {
-//            DictionaryBot.setPolishToRussianWorkState(false);
             telegramConfig.setWorkState(WorkState.RUSSIAN_TO_POLISH);
             return new SendMessage(message.getChatId().toString(), "Текущий режим: Русский -> Польский!");
         }

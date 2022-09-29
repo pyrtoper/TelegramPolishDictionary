@@ -30,7 +30,6 @@ public class CallbackQueryHandler {
         Matcher missingWordMatcher = missingWordPattern.matcher(callbackQuery.getData());
         if (missingWordMatcher.find()) {
             callbackQuery.setData(missingWordMatcher.group(1));
-//        if (callbackQuery.getData().contains("Моего слова нет в списке")) {
             return getWordIsMissingMessage(callbackQuery);
         } else {
             if (telegramConfig.getWorkState() == WorkState.POLISH_TO_RUSSIAN) {

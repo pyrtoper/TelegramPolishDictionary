@@ -33,8 +33,6 @@ public class TranslationDAOImpl implements TranslationDAO {
     public List<String> getSimilarTranslations(String initialWord) {
         Query query = entityManager
                 .createNativeQuery("select name from translations order by similarity(name, :initialWord) desc limit 5");
-//        Query query = entityManager
-//                .createNamedQuery("similarityQuery", String.class);
         query.setParameter("initialWord", initialWord);
         return query.getResultList();
     }
