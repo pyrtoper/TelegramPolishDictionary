@@ -26,3 +26,5 @@ Link to the bot: [@Polish_Russian_bot](https://t.me/Polish_Russian_bot)
 Dmitriy Malkin
 # **Contacts**
 Telegram: [@pyrtoper](https://t.me/pyrtoper)
+# **Database Schema**
+![DBSchema](https://user-images.githubusercontent.com/92227611/193127880-bb04e6dc-9639-4ac7-8122-edee5004a8e4.PNG)
