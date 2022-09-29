@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -47,18 +48,19 @@ public class TranslatedMeaning {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-//        for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet()) {
-//            result.append(entry.getKey());
-//            result.append("\n");
-//            for (String meaning: entry.getValue()) {
-//                result.append(meaning);
-//                result.append("\n");
-//            }
-//        }
         result.append("\nЗначения:");
         String prefixSpecification = "\n";
         String prefixMeaning = "\n    ";
-        for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet()) {
+//        for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet()) {
+        for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet().stream()
+                    .sorted(Comparator.comparing(entry -> {if (entry.getValue().get(0).isEmpty()) {
+                        return entry.getValue().get(1);
+                    } else {
+                        return entry.getValue().get(0);
+                    }
+                    })
+                )
+                .collect(Collectors.toList())) {
             result.append(prefixSpecification);
             result.append(entry.getKey());
             for (String meaning: entry.getValue().stream().sorted().collect(Collectors.toList())) {
@@ -69,10 +71,12 @@ public class TranslatedMeaning {
         return result.toString();
     }
 
-    private <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> sortedEntrySet(Map<K, V> map) {
-        return map.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toList());
-    }
+//    private <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> sortedEntrySet(Map<K, V> map) {
+//        return map.entrySet()
+//                .stream()
+//                .sorted(Map.Entry.comparingByValue())
+//                .collect(Collectors.toList());
+//    }
+
+
 }

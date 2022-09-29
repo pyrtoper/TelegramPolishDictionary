@@ -27,14 +27,6 @@ public class DictionaryBot extends SpringWebhookBot {
     @Autowired
     private CallbackQueryHandler callbackQueryHandler;
 
-
-//    public DictionaryBot(@Value("${telegram.bot.username}") String botUsername,
-//                         @Value("${telegram.bot.token}") String botToken) {
-//        this.botUsername = botUsername;
-//        this.botToken = botToken;
-//        System.out.println(botToken);
-//        System.out.println(botUsername);
-//    }
     public DictionaryBot(SetWebhook setWebhook,
                          MessageHandler messageHandler,
                          CallbackQueryHandler callbackQueryHandler) {
@@ -42,14 +34,6 @@ public class DictionaryBot extends SpringWebhookBot {
         this.messageHandler = messageHandler;
         this.callbackQueryHandler = callbackQueryHandler;
     }
-
-
-//    public DictionaryBot(String botUsername,
-//                         String botToken) {
-//        this.botUsername = botUsername;
-//        this.botToken = botToken;
-//    }
-
 
     @Override
     public String getBotUsername() {
@@ -61,41 +45,10 @@ public class DictionaryBot extends SpringWebhookBot {
         return botToken;
     }
 
-//    @Override
-//    public void onUpdateReceived(Update update) {
-//        if (update.hasMessage() && update.getMessage().hasText()) {
-//            SendMessage message = new SendMessage();
-//            message.setChatId(update.getMessage().getChatId().toString());
-//            Word word = wordService
-//                    .getWordByName(update.getMessage().getText());
-//            message.setText(word.getName() + "\n" +
-//                    word.getTranslatedMeanings());
-////            message.setText(update.getMessage().getText());
-//
-//            try {
-//                execute(message);
-//            } catch (TelegramApiException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
-//    public void registerBot() {
-//        try {
-//            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-//            botsApi.registerBot(this);
-//        } catch (TelegramApiException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
     @Override
     public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
         try {
             return handleUpdate(update);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,13 +85,6 @@ public class DictionaryBot extends SpringWebhookBot {
         this.botPath = botPath;
     }
 
-    public boolean isPolishToRussian() {
-        return PolishToRussian;
-    }
-
-    public void setPolishToRussian(boolean polishToRussian) {
-        PolishToRussian = polishToRussian;
-    }
 
     public static void setPolishToRussianWorkState(boolean desiredState) {
         DictionaryBot.PolishToRussian = desiredState;
