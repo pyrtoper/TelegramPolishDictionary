@@ -3,7 +3,6 @@ package com.pyrtoper.dictionary.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +51,10 @@ public class TranslatedMeaning {
         result.append("\n" + "\uD83D\uDC49" +  "Значения:");
         String prefixSpecification = "\n";
         String prefixMeaning = "\n    ";
-//        for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet()) {
+
+        //tried to sort entrySet like that after fetching from database,
+        //TreeMap didn't work as desired:(
+
         for (Map.Entry<String, List<String>> entry: translatedMeaning.entrySet().stream()
                     .sorted(Comparator.comparing(entry -> entry.getValue().stream()
                             .filter(Predicate.not(String::isEmpty))
@@ -73,13 +75,5 @@ public class TranslatedMeaning {
         }
         return result.toString();
     }
-
-//    private <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> sortedEntrySet(Map<K, V> map) {
-//        return map.entrySet()
-//                .stream()
-//                .sorted(Map.Entry.comparingByValue())
-//                .collect(Collectors.toList());
-//    }
-
 
 }

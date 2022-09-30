@@ -3,12 +3,10 @@ package com.pyrtoper.dictionary.dao;
 import com.pyrtoper.dictionary.entity.MissingWord;
 import com.pyrtoper.dictionary.exception.WordIsMissingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.lang.invoke.WrongMethodTypeException;
 import java.util.List;
 
 @Repository

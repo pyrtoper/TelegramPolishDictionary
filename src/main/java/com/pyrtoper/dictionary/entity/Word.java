@@ -42,7 +42,7 @@ public class Word {
             joinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "translation_id", referencedColumnName = "id")
     )
-    private Set<Translation> translationSet;
+    private Set<Translation> translationSet = new LinkedHashSet<>();
 
     public Word(String name) {
         this.name = name;
@@ -114,9 +114,6 @@ public class Word {
                 prefix = ", ";
             }
         }
-//        String result = ("Слово: " + name +
-//                translatedMeanings.toString() +
-//                wordForms.toString());
         return result.toString();
     }
 

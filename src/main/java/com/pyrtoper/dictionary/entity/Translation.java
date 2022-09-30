@@ -69,7 +69,7 @@ public class Translation {
     public String toString() {
         StringBuilder result = new StringBuilder();
         if (wordSet.isEmpty()) {
-            result.append("К сожалению, на польский перевести не удалось :(." +
+            result.append("К сожалению, на польский перевести не удалось \uD83D\uDE29." +
                     "Мой создатель уже оповещен об этом!");
         } else {
             result.append("\uD83D\uDC49Возможный перевод на польский:\n");
@@ -81,5 +81,18 @@ public class Translation {
             }
         }
         return result.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getName().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !obj.getClass().equals(this.getClass())) {
+            return false;
+        }
+        return this.getName().equals(((Translation) obj).getName());
     }
 }

@@ -1,13 +1,11 @@
 package com.pyrtoper.dictionary.handlers;
 
-import com.pyrtoper.dictionary.bot.DictionaryBot;
-import com.pyrtoper.dictionary.bot.TelegramConfig;
+import com.pyrtoper.dictionary.config.TelegramConfig;
 import com.pyrtoper.dictionary.constant.WorkState;
 import com.pyrtoper.dictionary.entity.Translation;
 import com.pyrtoper.dictionary.entity.Word;
-import com.pyrtoper.dictionary.exception.WordIsMissingException;
 import com.pyrtoper.dictionary.keyboard.InlineKeyboardMaker;
-import com.pyrtoper.dictionary.keyboard.PolishKeyboardMaker;
+import com.pyrtoper.dictionary.keyboard.WorkStateKeyboardMaker;
 import com.pyrtoper.dictionary.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -25,7 +23,7 @@ public class MessageHandler {
     @Autowired
     private InlineKeyboardMaker inlineKeyboardMaker;
     @Autowired
-    private PolishKeyboardMaker polishKeyboardMaker;
+    private WorkStateKeyboardMaker workStateKeyboardMaker;
     @Autowired
     private TelegramConfig telegramConfig;
 
@@ -60,7 +58,7 @@ public class MessageHandler {
                 "❗ Также поддерживает функцию: Возможно, Вы имели в виду... Поэтому не бойтесь опечаток и разных форм слова," +
                 " бот постарается найти наиболее подходящее к введенному Вами слову!\n\n" +
                 "❗ По умолчанию установлен первый режим");
-        sendMessage.setReplyMarkup(polishKeyboardMaker.getPolishKeyboard());
+        sendMessage.setReplyMarkup(workStateKeyboardMaker.getPolishKeyboard());
         sendMessage.enableMarkdown(false);
         return sendMessage;
     }

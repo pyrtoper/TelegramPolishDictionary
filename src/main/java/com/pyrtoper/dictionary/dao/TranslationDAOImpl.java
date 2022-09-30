@@ -1,7 +1,6 @@
 package com.pyrtoper.dictionary.dao;
 
 import com.pyrtoper.dictionary.entity.Translation;
-import com.pyrtoper.dictionary.entity.Word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class TranslationDAOImpl implements TranslationDAO {
@@ -37,8 +35,4 @@ public class TranslationDAOImpl implements TranslationDAO {
         return query.getResultList();
     }
 
-    @Override
-    public Set<Word> getPolishTranslations() {
-        return null;
-    }
 }

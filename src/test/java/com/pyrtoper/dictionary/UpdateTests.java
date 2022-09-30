@@ -2,16 +2,16 @@ package com.pyrtoper.dictionary;
 
 import static org.junit.jupiter.api.Assertions.*;
 import com.pyrtoper.dictionary.bot.DictionaryBot;
+import com.pyrtoper.dictionary.config.TelegramConfig;
+import com.pyrtoper.dictionary.constant.WorkState;
 import com.pyrtoper.dictionary.entity.Word;
 import com.pyrtoper.dictionary.service.WordService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -25,12 +25,12 @@ public class UpdateTests {
 
     private Message message;
     private Update update;
-
     private CallbackQuery callbackQuery;
     private static WordService wordService;
     @Autowired
     private DictionaryBot dictionaryBot;
-
+    @Autowired
+    private TelegramConfig telegramConfig;
     @Autowired
     public void setWordService(WordService wordService) {
         UpdateTests.wordService = wordService;
@@ -52,6 +52,7 @@ public class UpdateTests {
     public void checkSendingMessage(String wordName) {
         Mockito.when(message.getText()).thenReturn(wordName);
         Mockito.when(update.hasMessage()).thenReturn(true);
+        telegramConfig.setWorkState(WorkState.POLISH_TO_RUSSIAN);
         Word word = wordService.getWordByName(wordName);
         SendMessage sendMessage = (SendMessage) dictionaryBot.onWebhookUpdateReceived(update);
         assertEquals(sendMessage.getText(), word.toString());
@@ -63,6 +64,7 @@ public class UpdateTests {
         Mockito.when(update.hasCallbackQuery()).thenReturn(true);
         Mockito.when(callbackQuery.getData()).thenReturn(wordName);
         Word word = wordService.getWordByName(wordName);
+        telegramConfig.setWorkState(WorkState.POLISH_TO_RUSSIAN);
         SendMessage sendMessage = (SendMessage) dictionaryBot.onWebhookUpdateReceived(update);
         assertEquals(word.toString(), sendMessage.getText());
     }
@@ -70,7 +72,7 @@ public class UpdateTests {
     @ParameterizedTest
     @MethodSource("testPolishWords")
     public void checkWrongWorkState(String wordName) {
-        DictionaryBot.setPolishToRussianWorkState(false);
+        telegramConfig.setWorkState(WorkState.RUSSIAN_TO_POLISH);
         Mockito.when(update.hasCallbackQuery()).thenReturn(true);
         Mockito.when(callbackQuery.getData()).thenReturn(wordName);
         SendMessage sendMessage = (SendMessage) dictionaryBot.onWebhookUpdateReceived(update);
@@ -83,7 +85,7 @@ public class UpdateTests {
     public static Collection<Object[]> testPolishWords() {
         return Arrays.asList(new Object[][]{
                 {"czytać"},
-                {"miasto"}
+                {"miasto"},
         });
     }
 }
