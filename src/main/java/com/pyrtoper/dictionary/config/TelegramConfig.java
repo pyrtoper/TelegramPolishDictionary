@@ -1,4 +1,4 @@
-package com.pyrtoper.dictionary.bot;
+package com.pyrtoper.dictionary.config;
 
 import com.pyrtoper.dictionary.constant.WorkState;
 import org.springframework.beans.factory.annotation.Value;

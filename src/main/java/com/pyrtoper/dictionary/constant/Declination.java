@@ -13,10 +13,11 @@ public enum Declination {
     WOŁACZ("Wołacz");
 
 
-    private String declination;
+    private final String declination;
 
+    //to find ENUM by its value
     private static class Holder {
-        private static Map<String, Declination> MAP = new HashMap<>();
+        private static final Map<String, Declination> MAP = new HashMap<>();
     }
     Declination(String declination) {
         Holder.MAP.put(declination, this);

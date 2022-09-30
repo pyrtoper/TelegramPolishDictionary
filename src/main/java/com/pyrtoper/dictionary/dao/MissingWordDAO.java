@@ -1,7 +1,6 @@
 package com.pyrtoper.dictionary.dao;
 
 import com.pyrtoper.dictionary.entity.MissingWord;
-import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.List;
 

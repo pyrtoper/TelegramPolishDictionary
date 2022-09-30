@@ -2,10 +2,9 @@ package com.pyrtoper.dictionary.bot;
 
 import com.pyrtoper.dictionary.handlers.CallbackQueryHandler;
 import com.pyrtoper.dictionary.handlers.MessageHandler;
-import com.pyrtoper.dictionary.service.WordService;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
@@ -18,14 +17,14 @@ import org.telegram.telegrambots.starter.SpringWebhookBot;
 public class DictionaryBot extends SpringWebhookBot {
     private String botUsername;
     private String botToken;
-
     private String botPath;
-    public static boolean PolishToRussian = true;
 
     @Autowired
     private MessageHandler messageHandler;
     @Autowired
     private CallbackQueryHandler callbackQueryHandler;
+
+    private static final Logger logger = Logger.getLogger(DictionaryBot.class.getName());
 
     public DictionaryBot(SetWebhook setWebhook,
                          MessageHandler messageHandler,
@@ -50,6 +49,7 @@ public class DictionaryBot extends SpringWebhookBot {
         try {
             return handleUpdate(update);
         } catch (Exception e) {
+            logger.severe("Error in DictionaryBot class: " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -85,8 +85,4 @@ public class DictionaryBot extends SpringWebhookBot {
         this.botPath = botPath;
     }
 
-
-    public static void setPolishToRussianWorkState(boolean desiredState) {
-        DictionaryBot.PolishToRussian = desiredState;
-    }
 }

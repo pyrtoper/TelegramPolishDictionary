@@ -1,11 +1,8 @@
 package com.pyrtoper.dictionary;
 import com.pyrtoper.dictionary.constant.Declination;
 import com.pyrtoper.dictionary.constant.Numeral;
-import com.pyrtoper.dictionary.dao.TranslationDAO;
-import com.pyrtoper.dictionary.dao.WordDAO;
 import com.pyrtoper.dictionary.entity.Translation;
 import com.pyrtoper.dictionary.entity.Word;
-import com.pyrtoper.dictionary.service.TranslationService;
 import com.pyrtoper.dictionary.service.WordService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

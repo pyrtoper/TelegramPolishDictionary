@@ -7,9 +7,11 @@ public enum Numeral {
     SINGULAR("lp", "ед. ч"),
     PLURAL("lm", "мн. ч");
 
-    private String numeral;
+    private final String numeral;
 
-    private String russianNumeral;
+    private final String russianNumeral;
+
+    //to find ENUM by its value
     private static class Holder {
         static Map<String, Numeral> MAP = new HashMap<>();
     }

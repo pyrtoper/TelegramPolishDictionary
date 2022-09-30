@@ -7,10 +7,11 @@ public enum WorkState {
     POLISH_TO_RUSSIAN("Польский -> Русский"),
     RUSSIAN_TO_POLISH("Русский -> Польский");
 
-    private String workState;
+    private final String workState;
 
+    //to find ENUM by its value
     private static class Holder {
-        private static Map<String, WorkState> map = new HashMap<>();
+        private static final Map<String, WorkState> map = new HashMap<>();
     }
     WorkState(String workState) {
         Holder.map.put(workState, this);

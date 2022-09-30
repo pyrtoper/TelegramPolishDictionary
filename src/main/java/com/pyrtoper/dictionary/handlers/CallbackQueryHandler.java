@@ -1,7 +1,6 @@
 package com.pyrtoper.dictionary.handlers;
 
-import com.pyrtoper.dictionary.bot.DictionaryBot;
-import com.pyrtoper.dictionary.bot.TelegramConfig;
+import com.pyrtoper.dictionary.config.TelegramConfig;
 import com.pyrtoper.dictionary.constant.WorkState;
 import com.pyrtoper.dictionary.entity.MissingWord;
 import com.pyrtoper.dictionary.entity.Translation;
@@ -53,6 +52,9 @@ public class CallbackQueryHandler {
     private SendMessage processRussianWord(CallbackQuery callbackQuery) {
         try {
             Translation translation = wordService.getTranslationByName(callbackQuery.getData());
+            if (translation.getWordSet().isEmpty()) {
+                addMissingWord(callbackQuery);
+            }
             return new SendMessage(callbackQuery.getMessage().getChatId().toString(),
                     translation.toString());
         } catch (EmptyResultDataAccessException e) {
@@ -66,6 +68,12 @@ public class CallbackQueryHandler {
     }
 
     private SendMessage getWordIsMissingMessage(CallbackQuery callbackQuery) {
+       addMissingWord(callbackQuery);
+        return new SendMessage(callbackQuery.getMessage().getChatId().toString(),
+                "Сожалею, что так произошло, мой создатель уже оповещен об этом недоразумении!");
+    }
+
+    private void addMissingWord(CallbackQuery callbackQuery) {
         MissingWord missingWord = new MissingWord();
         missingWord.setWordName(callbackQuery.getData());
         missingWord.setLocalDateTime(LocalDateTime.now());
@@ -74,8 +82,6 @@ public class CallbackQueryHandler {
         } catch (WordIsMissingException e) {
             wordService.saveMissingWord(missingWord);
         }
-        return new SendMessage(callbackQuery.getMessage().getChatId().toString(),
-                "Сожалею, что так произошло, мой создатель уже оповещен об этом недоразумении!");
     }
 
 }

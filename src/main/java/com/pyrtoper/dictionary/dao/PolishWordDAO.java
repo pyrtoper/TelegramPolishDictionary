@@ -35,8 +35,6 @@ public class PolishWordDAO implements WordDAO {
     public List<String> getSimilarWords(String initialWord) {
         Query query = entityManager
                 .createNativeQuery("select name from words order by similarity(name, :initialWord) desc limit 5");
-//        Query query = entityManager
-//                .createNamedQuery("similarityQuery", String.class);
         query.setParameter("initialWord", initialWord);
         return query.getResultList();
     }
