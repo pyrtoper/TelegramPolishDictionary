@@ -1,8 +1,5 @@
 package com.pyrtoper.dictionary.constant;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public enum Declination {
     MIANOWNIK("Mianownik"),
     DOPEŁNIACZ("Dopełniacz"),
@@ -15,12 +12,7 @@ public enum Declination {
 
     private final String declination;
 
-    //to find ENUM by its value
-    private static class Holder {
-        private static final Map<String, Declination> MAP = new HashMap<>();
-    }
     Declination(String declination) {
-        Holder.MAP.put(declination, this);
         this.declination = declination;
     }
 
@@ -28,7 +20,4 @@ public enum Declination {
         return declination;
     }
 
-    public static Declination getDeclination(String name) {
-        return Holder.MAP.get(name);
-    }
 }

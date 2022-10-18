@@ -5,18 +5,17 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.*;
 
-
 @Entity
 @Table(name = "words")
 @NamedEntityGraph(name = "graph.Word.meanings.wordForms.translations",
         attributeNodes = {@NamedAttributeNode("translatedMeanings"),
                 @NamedAttributeNode("wordForms"),
                 @NamedAttributeNode("translationSet")})
-public class Word {
+public class PolishWord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -44,11 +43,11 @@ public class Word {
     )
     private Set<Translation> translationSet = new LinkedHashSet<>();
 
-    public Word(String name) {
+    public PolishWord(String name) {
         this.name = name;
     }
 
-    public Word() {
+    public PolishWord() {
     }
 
     public int getId() {
@@ -91,31 +90,28 @@ public class Word {
         this.translationSet = translationList;
     }
 
-    public void addTranslation(Translation translation) {
-        if (translationSet == null) {
-            translationSet = new HashSet<>();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
-        translationSet.add(translation);
+        if (!(o instanceof PolishWord)) {
+            return false;
+        }
+        PolishWord other = (PolishWord) o;
+        return id != null &&
+            id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append("Слово: ");
-        result.append(name);
-        result.append(translatedMeanings.toString());
-        result.append(wordForms.toString());
-        if (!translationSet.isEmpty()) {
-            result.append("\n\uD83D\uDC49Возможный перевод на русский: ");
-            String prefix = "";
-            for (Translation translation: translationSet) {
-                result.append(prefix);
-                result.append(translation.getName());
-                prefix = ", ";
-            }
-        }
-        return result.toString();
+        return "PolishWord{" +
+            "name='" + name + '\'' +
+            '}';
     }
-
-
 }
