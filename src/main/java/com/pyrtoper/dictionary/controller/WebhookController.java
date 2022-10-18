@@ -10,8 +10,13 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @RestController
 public class WebhookController {
+
+    private final DictionaryBot dictionaryBot;
+
     @Autowired
-    private DictionaryBot dictionaryBot;
+    public WebhookController(DictionaryBot dictionaryBot) {
+        this.dictionaryBot = dictionaryBot;
+    }
 
     @PostMapping("/")
     public BotApiMethod<?> onUpdateReceived(@RequestBody Update update) {

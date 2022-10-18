@@ -8,13 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class Pointcuts {
 
-    @Pointcut("execution(* com.pyrtoper.dictionary.dao.*.*(..))")
-    public void forDAOPackage() {}
+    @Pointcut("execution(* com.pyrtoper.dictionary.repository.*.*(..))")
+    public void forRepositoryPackage() {}
 
     @Pointcut("execution(* com.pyrtoper.dictionary.service.*.*(..))")
     public void forServicePackage() {}
 
     @Pointcut("execution(* com.pyrtoper.dictionary.controller.*.*(..))")
     public void forControllerPackage() {}
-
+    @Pointcut("execution(* com.pyrtoper.dictionary.handlers.*.*(..))")
+    public void forHandlersPackage() {}
 }

@@ -7,13 +7,13 @@ import java.util.Set;
 @Entity
 @Table(name = "translations")
 @NamedEntityGraph(name = "graph.Translation.wordSet",
-        attributeNodes = @NamedAttributeNode("wordSet"))
+        attributeNodes = @NamedAttributeNode("polishWordSet"))
 public class Translation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column
     private String name;
@@ -25,7 +25,7 @@ public class Translation {
             joinColumns = @JoinColumn(name = "translation_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id")
     )
-    private Set<Word> wordSet;
+    private Set<PolishWord> polishWordSet;
 
     public Translation() {
     }
@@ -50,49 +50,36 @@ public class Translation {
         this.name = name;
     }
 
-    public Set<Word> getWordSet() {
-        return wordSet;
+    public Set<PolishWord> getWordSet() {
+        return polishWordSet;
     }
 
-    public void setWordSet(Set<Word> wordList) {
-        this.wordSet = wordList;
-    }
-
-    public void addOriginalWord(Word word) {
-        if (wordSet == null) {
-            wordSet = new HashSet<>();
-        }
-        wordSet.add(word);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        if (wordSet.isEmpty()) {
-            result.append("К сожалению, на польский перевести не удалось \uD83D\uDE29." +
-                    "Мой создатель уже оповещен об этом!");
-        } else {
-            result.append("\uD83D\uDC49Возможный перевод на польский:\n");
-            String prefix = "";
-            for (Word word: wordSet) {
-                result.append(prefix);
-                result.append(word.getName());
-                prefix = ", ";
-            }
-        }
-        return result.toString();
+    public void setWordSet(Set<PolishWord> polishWordList) {
+        this.polishWordSet = polishWordList;
     }
 
     @Override
     public int hashCode() {
-        return this.getName().hashCode();
+        return getClass().hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !obj.getClass().equals(this.getClass())) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Translation)) {
             return false;
         }
-        return this.getName().equals(((Translation) obj).getName());
+        Translation other = (Translation) obj;
+        return id != null &&
+            id.equals(other.getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Translation{" +
+            "name='" + name + '\'' +
+            '}';
     }
 }

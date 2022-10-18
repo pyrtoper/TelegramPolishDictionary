@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 public class WorkStateKeyboardMaker {
-    public ReplyKeyboardMarkup getPolishKeyboard() {
+    public ReplyKeyboardMarkup getWorkStateKeyboard() {
         KeyboardRow row = new KeyboardRow();
         row.add(new KeyboardButton("Польский -> Русский"));
         row.add(new KeyboardButton("Русский -> Польский"));

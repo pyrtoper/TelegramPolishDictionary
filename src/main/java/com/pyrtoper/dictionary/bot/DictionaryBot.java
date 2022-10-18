@@ -2,9 +2,8 @@ package com.pyrtoper.dictionary.bot;
 
 import com.pyrtoper.dictionary.handlers.CallbackQueryHandler;
 import com.pyrtoper.dictionary.handlers.MessageHandler;
-import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
@@ -12,26 +11,27 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.starter.SpringWebhookBot;
 
-
-@PropertySource("classpath:application.properties")
 public class DictionaryBot extends SpringWebhookBot {
-    private String botUsername;
-    private String botToken;
-    private String botPath;
+    private final String botUsername;
+    private final String botToken;
+    private final String botPath;
+    private final MessageHandler messageHandler;
+    private final CallbackQueryHandler callbackQueryHandler;
 
-    @Autowired
-    private MessageHandler messageHandler;
-    @Autowired
-    private CallbackQueryHandler callbackQueryHandler;
-
-    private static final Logger logger = Logger.getLogger(DictionaryBot.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(DictionaryBot.class.getName());
 
     public DictionaryBot(SetWebhook setWebhook,
                          MessageHandler messageHandler,
-                         CallbackQueryHandler callbackQueryHandler) {
+                         CallbackQueryHandler callbackQueryHandler,
+                         String botUsername,
+                         String botToken,
+                         String botPath) {
         super(setWebhook);
         this.messageHandler = messageHandler;
         this.callbackQueryHandler = callbackQueryHandler;
+        this.botUsername = botUsername;
+        this.botToken = botToken;
+        this.botPath = botPath;
     }
 
     @Override
@@ -49,9 +49,10 @@ public class DictionaryBot extends SpringWebhookBot {
         try {
             return handleUpdate(update);
         } catch (Exception e) {
-            logger.severe("Error in DictionaryBot class: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error in DictionaryBot class: " + e.getMessage());
         }
+        logger.debug(DictionaryBot.class.getName() + " onWebhookUpdateReceived() "
+            + "didn't do anything");
         return null;
     }
 
@@ -65,24 +66,13 @@ public class DictionaryBot extends SpringWebhookBot {
                 return messageHandler.answerMessage(message);
             }
         }
+        logger.debug(DictionaryBot.class.getName() + " handleUpdate() didn't do anything");
         return null;
-    }
-
-    public void setBotUsername(String botUsername) {
-        this.botUsername = botUsername;
-    }
-
-    public void setBotToken(String botToken) {
-        this.botToken = botToken;
     }
 
     @Override
     public String getBotPath() {
         return botPath;
-    }
-
-    public void setBotPath(String botPath) {
-        this.botPath = botPath;
     }
 
 }
