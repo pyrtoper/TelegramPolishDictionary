@@ -19,8 +19,9 @@ Link to the bot: [@Polish_Russian_bot](https://t.me/Polish_Russian_bot)
 - [Apache Maven](https://maven.apache.org/) - Dependencies management
 - [PostgreSQL](https://www.postgresql.org/) - DBMS
 - [Telegram Bots](https://core.telegram.org/bots) - Interaction with Telegram API
-- [Mockito](https://site.mockito.org/), [JUnit 5](https://junit.org/junit5/) - Testing
+- [Mockito](https://site.mockito.org/), [JUnit 5](https://junit.org/junit5/), Testcontainers- Testing
 - Spring AOP - Logging
+- Flyway - DB migrations
 - Git - Version Control System
 - [Railway.app](https://railway.app/) - Hosting and deploying
 # **Author**
